@@ -17,13 +17,13 @@ struct link {
     interface_t interface1;
     interface_t interface2;
     unsigned int cost;
-}
+};
 
 struct node {
     char nodeName[NODE_NAME_SIZE];
     interface_t *intf[MAX_INTF_PER_NODE];
     glued_ll_t graphGlue;
-}
+};
 
 typedef struct graph {
     char topologyName[32];
