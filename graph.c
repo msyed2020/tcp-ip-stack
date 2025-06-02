@@ -17,11 +17,34 @@ static inline int getNodeINTFAvailableSlot(node_t *node) {
 
 void insertLinkBetweenNodes(node_t *node1, node_t *node2,
     char *fromIfName, char *toIfName, unsigned int cost) {
+        // assigning the two links to each other and making
+        // use of the link struct
         link_t *link = calloc(1, sizeof(link_t));
         strncpy(link->interfacel.ifName, fromIfName, INTERF_NAME_SIZE);
         link->interface1.ifName[INTERF_NAME_SIZE] = '\0';
         strncpy(link->interface2.ifName, toIfName, INTERF_NAME_SIZE);
         link->interface2.ifName[INTERF_NAME_SIZE] = '\0';
+
+        // setting the pointers of the interfaces to the link
+
+        link->interface1.link = link;
+        link->interface2.link = link;
+
+        // assigning the two linkable nodes to be the interface's
+        // attached nodes
+
+        link->interface1.attNode = node1;
+        link->interface2.attNode = node2;
+
+        link->cost = cost; // for cost later
+
+        int emptyINTERFSlot;
+
+        emptyINTERFSlot = getNodeINTFAvailableSlot(node1);
+        node1->interface[emptyINTERFSlot] = &link->interface1;
+
+        emptyINTERFSlot = getNodeINTFAvailableSlot(node2);
+        node2->interface[emptyINTERFSlot] = &link->interface2;
     }
 
 graph_t *createNewGraph(char *topologyName) {
