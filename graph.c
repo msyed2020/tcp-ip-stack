@@ -41,7 +41,7 @@ void insertLinkBetweenNodes(node_t *node1, node_t *node2,
         int emptyINTERFSlot;
 
         // look for empty slot in node to assign interface
-        
+
         emptyINTERFSlot = getNodeINTFAvailableSlot(node1); 
         node1->interface[emptyINTERFSlot] = &link->interface1;
 
@@ -64,4 +64,20 @@ node_t *createGraphNode(graph_t *graph, char *nodeName) {
     init_glthread(&node->graphGlue);
     glthreadAddNext(&graph->nodeList, &node->graphGlue);
     return node;
+}
+
+// edit the following functions for our code later
+
+static inline interface_t * getNodeIfByName(node_t *node, char *ifName) {
+    if (!node || !ifName) {
+        return NULL;
+    }
+
+    for (int i = 0; i < MAX_INTF_PER_NODE; i++) {
+        if (node->interface[i] && strcmp(node->interface[i]->ifName, ifName) == 0) {
+            return node->interface[i];
+        }
+    }
+
+    return NULL;
 }
