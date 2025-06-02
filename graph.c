@@ -15,6 +15,15 @@ static inline int getNodeINTFAvailableSlot(node_t *node) {
     return -1;
 }
 
+void insertLinkBetweenNodes(node_t *node1, node_t *node2,
+    char *fromIfName, char *toIfName, unsigned int cost) {
+        link_t *link = calloc(1, sizeof(link_t));
+        strncpy(link->interfacel.ifName, fromIfName, INTERF_NAME_SIZE);
+        link->interface1.ifName[INTERF_NAME_SIZE] = '\0';
+        strncpy(link->interface2.ifName, toIfName, INTERF_NAME_SIZE);
+        link->interface2.ifName[INTERF_NAME_SIZE] = '\0';
+    }
+
 graph_t *createNewGraph(char *topologyName) {
     graph_t *graph = calloc(1, sizeof(graph_t));
     strncpy(graph->topologyName, topologyName, 32);

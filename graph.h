@@ -8,7 +8,7 @@ typedef struct node node_t;
 typedef struct link link_t;
 
 typedef struct interface {
-    char if_name[INTERF_NAME_SIZE];
+    char ifName[INTERF_NAME_SIZE];
     struct node *attNode;
     struct link *link;
 } interface_t;
