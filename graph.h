@@ -28,7 +28,7 @@ struct node {
 typedef struct graph {
     char topologyName[32];
     glued_ll_t nodeList;
-};
+} graph_t;
 
-static inline node_t* get_nbr_node(interface_t *interface);
-static inline int get_node_intf_available_slot(node_t *node);
+static inline node_t* getNBRNode(interface_t *interface);
+static inline int getNodeINTFAvailableSlot(node_t *node);
