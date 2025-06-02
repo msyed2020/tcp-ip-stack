@@ -40,7 +40,9 @@ void insertLinkBetweenNodes(node_t *node1, node_t *node2,
 
         int emptyINTERFSlot;
 
-        emptyINTERFSlot = getNodeINTFAvailableSlot(node1);
+        // look for empty slot in node to assign interface
+        
+        emptyINTERFSlot = getNodeINTFAvailableSlot(node1); 
         node1->interface[emptyINTERFSlot] = &link->interface1;
 
         emptyINTERFSlot = getNodeINTFAvailableSlot(node2);
