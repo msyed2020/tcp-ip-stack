@@ -89,11 +89,12 @@ static inline node_t * getNodeByNodeName(graph_t *topo, char *nodeName) {
 
     node_t *currentNode = NULL;
 
-    ITERATE_GRAPH_NODES_BEGIN(topo, currentNode) {
+    ITERATE_BEGIN(topo, currentNode) { // go through linked list -- since it hasn't
+        // been implemented yet, we can give a placeholder name for now
         if (strcmp(currentNode->nodeName, nodeName) == 0) {
             return currentNode;
         }
-    } ITERATE_GRAPH_NODES_END;
+    } ITERATE_END;
 
     return NULL;
 }
