@@ -81,3 +81,19 @@ static inline interface_t * getNodeIfByName(node_t *node, char *ifName) {
 
     return NULL;
 }
+
+static inline node_t * getNodeByNodeName(graph_t *topo, char *nodeName) {
+    if (!topo || !nodeName) {
+        return NULL;
+    }
+
+    node_t *currentNode = NULL;
+
+    ITERATE_GRAPH_NODES_BEGIN(topo, currentNode) {
+        if (strcmp(currentNode->nodeName, nodeName) == 0) {
+            return currentNode;
+        }
+    } ITERATE_GRAPH_NODES_END;
+
+    return NULL;
+}
