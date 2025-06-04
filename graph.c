@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
-static inline node_t* get_NBRNode(interface_t *interface) {
+static inline node_t* getNBRNode(interface_t *interface) {
     return interface->attNode;
 }
 
@@ -43,10 +43,10 @@ void insertLinkBetweenNodes(node_t *node1, node_t *node2,
         // look for empty slot in node to assign interface
 
         emptyINTERFSlot = getNodeINTFAvailableSlot(node1); 
-        node1->interface[emptyINTERFSlot] = &link->interface1;
+        node1->interfaces[emptyINTERFSlot] = &link->interface1;
 
         emptyINTERFSlot = getNodeINTFAvailableSlot(node2);
-        node2->interface[emptyINTERFSlot] = &link->interface2;
+        node2->interfaces[emptyINTERFSlot] = &link->interface2;
     }
 
 graph_t *createNewGraph(char *topologyName) {
