@@ -28,3 +28,20 @@ void gluedLLAddFront(glued_ll_t *list, glued_ll_node_t *node) {
     list->head = node;
 }
 
+static void gluedLLNodeRemoval(glued_ll_node_t *node) {
+    if (!node->left) {
+        if (node->right) {
+            node->left->right = NULL;
+            node->right = 0;
+            return;
+        }
+        return;
+    }
+    
+    if (!node->right) {
+        node->left->right = NULL;
+        node->left = NULL;
+        return;
+    }
+
+}
