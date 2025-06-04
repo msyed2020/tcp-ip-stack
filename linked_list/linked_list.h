@@ -1,6 +1,8 @@
 #ifndef __GLUELL__
 #define __GLUELL__
 
+#include <stddef.h>
+
 typedef struct glued_ll_node {
     struct glued_ll_node *left;
     struct glued_ll_node *right;
@@ -19,9 +21,9 @@ void gluedLLRemoveNode(glued_ll_t *list, glued_ll_node_t *node);
 {                                                           \
     glued_ll_node_t *gluedNode = NULL;                      \
     glued_ll_node_t *next = NULL;                           \
-    for (gluedNode = lstptr->head; gluedNode; gluedNode = next) {   \
+    for (gluedNode = (lstptr)->head; gluedNode; gluedNode = next) {   \
         next = gluedNode->right;                            \
-        ptr = (struct type *)((char *) gluedNode - lstptr->offset);
+        ptr = (struct_type *)((char *) gluedNode - (lstptr)->offset);
       
 #define ITERATE_GLUED_LL_END }}
 
@@ -33,7 +35,7 @@ void gluedLLRemoveNode(glued_ll_t *list, glued_ll_node_t *node);
 
 void initGluedLL(glued_ll_t *linkedList, unsigned int offset);
 
-#define offsetof(struct_name, field_name)   \
-    ((unsigned int)&((struct_name *)0)->field_name)
+// #define offsetof(struct_name, field_name)   \
+//     ((unsigned int)&((struct_name *)0)->field_name)
 
 #endif
