@@ -15,25 +15,25 @@ void gluedLLAddFront(glued_ll_t *list, glued_ll_node_t *node);
 
 void gluedLLRemoveNode(glued_ll_t *list, glued_ll_node_t *node);
 
-#define ITERATE_GLUED_LL_BEGIN(lstptr, struct_type, ptr)
-{
-    glued_ll_node_t *gluedNode = NULL;
-    glued_ll_node_t *next = NULL;
-    for (gluedNode = lstptr->head; gluedNode; gluedNode = next) {
-        next = gluedNode->right;
+#define ITERATE_GLUED_LL_BEGIN(lstptr, struct_type, ptr)    \
+{                                                           \
+    glued_ll_node_t *gluedNode = NULL;                      \
+    glued_ll_node_t *next = NULL;                           \
+    for (gluedNode = lstptr->head; gluedNode; gluedNode = next) {   \
+        next = gluedNode->right;                            \
         ptr = (struct type *)((char *) gluedNode - lstptr->offset);
       
-    #define ITERATE_GLUED_LL_END
-    }
-}
+#define ITERATE_GLUED_LL_END }}
 
-#define gluedLLNodeInit(gluedNode)
-    gluedNode->left = NULL;
-    gluedNode->right = NULL;
+#define gluedLLNodeInit(gluedNode)  \
+    do {                            \
+        (gluedNode)->left = NULL;   \
+        (gluedNode)->right = NULL;  \
+    } while(0)
 
 void initGluedLL(glued_ll_t *linkedList, unsigned int offset);
 
-#define offsetof(struct_name, field_name)
+#define offsetof(struct_name, field_name)   \
     ((unsigned int)&((struct_name *)0)->field_name)
 
 #endif
