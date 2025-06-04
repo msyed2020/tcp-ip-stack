@@ -23,4 +23,8 @@ void gluedLLAddFront(glued_ll_t *list, glued_ll_node_t *node) {
         list->head = node;
         return;
     }
+    glued_ll_node_t *head = list->head;
+    gluedLLAddNextNode(node, head);
+    list->head = node;
 }
+
