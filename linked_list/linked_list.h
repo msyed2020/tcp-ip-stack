@@ -13,7 +13,7 @@ typedef struct glued_ll {
 
 void gluedLLAddFront(glued_ll_t *list, glued_ll_node_t *node);
 
-void gluedLLRemove(glued_ll_t *list, glued_ll_node_t *node);
+void gluedLLRemoveNode(glued_ll_t *list, glued_ll_node_t *node);
 
 #define ITERATE_GLUED_LL_BEGIN(lstptr, struct_type, ptr)
 {

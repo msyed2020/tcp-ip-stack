@@ -37,11 +37,27 @@ static void gluedLLNodeRemoval(glued_ll_node_t *node) {
         }
         return;
     }
-    
+
     if (!node->right) {
         node->left->right = NULL;
         node->left = NULL;
         return;
     }
 
+    node->left->right = node->right;
+    node->right->left = node->left;
+    node->left = 0;
+    node->right = 0;
+}
+
+void gluedLLRemoveNode(glued_ll_t *list, glued_ll_node_t *node) {
+    glued_ll_node_t *head = list->head;
+    if (head == node)
+        list->head = head->right;
+    gluedLLNodeRemoval(node);
+}
+
+void initGluedLL(glued_ll_t *linkedList, unsigned int offset) {
+    linkedList->head = NULL;
+    linkedList->offset = offset;
 }
