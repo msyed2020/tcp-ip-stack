@@ -97,3 +97,57 @@ static inline node_t *getNodeByNodeName(graph_t *topo, char *nodeName) {
 
     return NULL;
 }
+
+graph_t *buildFirstTopo() {
+    graph_t *topo = calloc(1, sizeof(graph_t));
+    strncpy(topo->topologyName, "MyFirstTopo", sizeof(topo->topologyName) - 1);
+    topo->topologyName[sizeof(topo->topologyName) - 1] = '\0';
+    initGluedLL(&topo->nodeList, offsetof(node_t, graphGlue));
+
+    node_t *R1 = calloc(1, sizeof(node_t));
+    strncpy(R1->nodeName, "R1", NODE_NAME_SIZE - 1);
+    R1->nodeName[NODE_NAME_SIZE - 1] = '\0';
+    gluedLLNodeInit(&R1->graphGlue);
+    gluedLLAddFront(&topo->nodeList, &R1->graphGlue);
+
+    node_t *R2 = calloc(1, sizeof(node_t));
+    strncpy(R2->nodeName, "R2", NODE_NAME_SIZE - 1);
+    R2->nodeName[NODE_NAME_SIZE - 1] = '\0';
+    gluedLLNodeInit(&R2->graphGlue);
+    gluedLLAddFront(&topo->nodeList, &R2->graphGlue);
+
+    node_t *R3 = calloc(1, sizeof(node_t));
+    strncpy(R3->nodeName, "R3", NODE_NAME_SIZE - 1);
+    R3->nodeName[NODE_NAME_SIZE - 1] = '\0';
+    gluedLLNodeInit(&R3->graphGlue);
+    gluedLLAddFront(&topo->nodeList, &R3->graphGlue);
+
+    insertLinkBetweenNodes(R1, R2, "eth0", "eth1", 1);
+    insertLinkBetweenNodes(R2, R3, "eth2", "eth3", 1);
+    insertLinkBetweenNodes(R1, R3, "eth4", "eth5", 3);
+
+    return topo;
+}
+
+void dumpGraph(graph_t *graph) {
+    printf("Topology: %s\n", graph->topologyName);
+
+    node_t *node = NULL;
+    ITERATE_GLUED_LL_BEGIN(&graph->nodeList, node_t, node) {
+        printf("Node: %s\n", node->nodeName);
+
+        for (int i = 0; i < MAX_INTF_PER_NODE; i++) {
+            interface_t *intf = node->interfaces[i];
+            if (intf && intf->link) {
+                node_t *nbr = intf->link->interface1.attNode == node
+                                ? intf->link->interface2.attNode
+                                : intf->link->interface1.attNode;
+
+                printf("  Interface: %s --> %s (cost: %u)\n",
+                       intf->ifName,
+                       nbr->nodeName,
+                       intf->link->cost);
+            }
+        }
+    } ITERATE_GLUED_LL_END;
+}
