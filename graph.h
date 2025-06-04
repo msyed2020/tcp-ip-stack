@@ -32,3 +32,13 @@ typedef struct graph {
 
 static inline node_t* getNBRNode(interface_t *interface);
 static inline int getNodeINTFAvailableSlot(node_t *node);
+
+#define ITERATE_GLUED_LL_BEGIN(lstptr, struct_type, ptr)        \
+{                                                               \
+    glued_ll_node_t *gluedNode = NULL;                          \
+    glued_ll_node_t *next = NULL;                               \
+    for (gluedNode = (lstptr)->head; gluedNode; gluedNode = next) { \
+        next = gluedNode->right;                                \
+        ptr = (struct_type *)((char *) gluedNode - (lstptr)->offset);
+
+#define ITERATE_GLUED_LL_END }}

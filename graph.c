@@ -21,9 +21,9 @@ void insertLinkBetweenNodes(node_t *node1, node_t *node2,
         // use of the link struct
         link_t *link = calloc(1, sizeof(link_t));
         strncpy(link->interfacel.ifName, fromIfName, INTERF_NAME_SIZE);
-        link->interface1.ifName[INTERF_NAME_SIZE] = '\0';
+        link->interface1.ifName[INTERF_NAME_SIZE - 1] = '\0';
         strncpy(link->interface2.ifName, toIfName, INTERF_NAME_SIZE);
-        link->interface2.ifName[INTERF_NAME_SIZE] = '\0';
+        link->interface2.ifName[INTERF_NAME_SIZE - 1] = '\0';
 
         // setting the pointers of the interfaces to the link
 
@@ -75,26 +75,25 @@ static inline interface_t * getNodeIfByName(node_t *node, char *ifName) {
 
     for (int i = 0; i < MAX_INTF_PER_NODE; i++) {
         if (node->interface[i] && strcmp(node->interface[i]->ifName, ifName) == 0) {
-            return node->interface[i];
+            return node->interfaces[i];
         }
     }
 
     return NULL;
 }
 
-static inline node_t * getNodeByNodeName(graph_t *topo, char *nodeName) {
-    if (!topo || !nodeName) {
+
+static inline node_t *getNodeByNodeName(graph_t *topo, char *nodeName) {
+    if (!topo || !nodeName)
         return NULL;
-    }
 
     node_t *currentNode = NULL;
 
-    ITERATE_BEGIN(topo, currentNode) { // go through linked list -- since it hasn't
-        // been implemented yet, we can give a placeholder name for now
+    ITERATE_GLUED_LL_BEGIN(&topo->nodeList, node_t, currentNode) {
         if (strcmp(currentNode->nodeName, nodeName) == 0) {
             return currentNode;
         }
-    } ITERATE_END;
+    } ITERATE_GLUED_LL_END;
 
     return NULL;
 }
