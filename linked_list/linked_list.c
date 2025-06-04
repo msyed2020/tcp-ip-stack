@@ -23,15 +23,14 @@ void gluedLLAddFront(glued_ll_t *list, glued_ll_node_t *node) {
         list->head = node;
         return;
     }
-    glued_ll_node_t *head = list->head;
-    gluedLLAddNextNode(node, head);
+    gluedLLAddNextNode(node, list->head);
     list->head = node;
 }
 
 static void gluedLLNodeRemoval(glued_ll_node_t *node) {
     if (!node->left) {
         if (node->right) {
-            node->left->right = NULL;
+            node->right->left = NULL;
             node->right = 0;
             return;
         }
@@ -46,14 +45,13 @@ static void gluedLLNodeRemoval(glued_ll_node_t *node) {
 
     node->left->right = node->right;
     node->right->left = node->left;
-    node->left = 0;
-    node->right = 0;
+    node->left = NULL;
+    node->right = NULL;
 }
 
 void gluedLLRemoveNode(glued_ll_t *list, glued_ll_node_t *node) {
-    glued_ll_node_t *head = list->head;
-    if (head == node)
-        list->head = head->right;
+    if (list->head == node)
+        list->head = node->right;
     gluedLLNodeRemoval(node);
 }
 
