@@ -11,7 +11,9 @@ typedef struct glued_ll {
     unsigned int offset;
 } glued_ll_t;
 
-void gluedLLAdd(glued_ll_t *first, glued_ll_node_t *node);
+void gluedLLAdd(glued_ll_t *list, glued_ll_node_t *node);
+
+void gluedLLRemove(glued_ll_t *list, glued_ll_node_t *node);
 
 #define ITERATE_GLUED_LL_BEGIN(lstptr, struct_type, ptr)
 {

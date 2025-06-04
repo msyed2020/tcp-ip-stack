@@ -19,4 +19,8 @@ static void gluedLLAddNextNode(glued_ll_node_t *curr, glued_ll_node_t *newNode) 
 void gluedLLAddFront(glued_ll_t *list, glued_ll_node_t *node) {
     node->left = NULL;
     node->right = NULL;
+    if (!list->head) {
+        list->head = node;
+        return;
+    }
 }
