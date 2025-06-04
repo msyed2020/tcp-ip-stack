@@ -35,7 +35,4 @@ void gluedLLRemoveNode(glued_ll_t *list, glued_ll_node_t *node);
 
 void initGluedLL(glued_ll_t *linkedList, unsigned int offset);
 
-// #define offsetof(struct_name, field_name)   \
-//     ((unsigned int)&((struct_name *)0)->field_name)
-
 #endif
