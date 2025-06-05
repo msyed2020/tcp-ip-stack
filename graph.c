@@ -98,7 +98,7 @@ static inline node_t *getNodeByNodeName(graph_t *topo, char *nodeName) {
     return NULL;
 }
 
-graph_t *buildFirstTopo() {
+graph_t *buildFirstTopo() { // ensure this crap works
     graph_t *topo = calloc(1, sizeof(graph_t));
     strncpy(topo->topologyName, "MyFirstTopo", sizeof(topo->topologyName) - 1);
     topo->topologyName[sizeof(topo->topologyName) - 1] = '\0';
