@@ -20,7 +20,7 @@ void insertLinkBetweenNodes(node_t *node1, node_t *node2,
         // assigning the two links to each other and making
         // use of the link struct
         link_t *link = calloc(1, sizeof(link_t));
-        strncpy(link->interfacel.ifName, fromIfName, INTERF_NAME_SIZE);
+        strncpy(link->interface1.ifName, fromIfName, INTERF_NAME_SIZE);
         link->interface1.ifName[INTERF_NAME_SIZE - 1] = '\0';
         strncpy(link->interface2.ifName, toIfName, INTERF_NAME_SIZE);
         link->interface2.ifName[INTERF_NAME_SIZE - 1] = '\0';
@@ -53,7 +53,7 @@ graph_t *createNewGraph(char *topologyName) {
     graph_t *graph = calloc(1, sizeof(graph_t));
     strncpy(graph->topologyName, topologyName, 32);
     graph->topologyName[32] = '\0';
-    init_glthread(&graph->nodeList);
+    initGluedLL(&graph->nodeList, 0);
     return graph;
 }
 
@@ -74,7 +74,7 @@ static inline interface_t * getNodeIfByName(node_t *node, char *ifName) {
     }
 
     for (int i = 0; i < MAX_INTF_PER_NODE; i++) {
-        if (node->interface[i] && strcmp(node->interface[i]->ifName, ifName) == 0) {
+        if (node->interfaces[i] && strcmp(node->interfaces[i]->ifName, ifName) == 0) {
             return node->interfaces[i];
         }
     }
