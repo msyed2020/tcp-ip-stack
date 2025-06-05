@@ -129,7 +129,7 @@ graph_t *buildFirstTopo() { // ensure this crap works
     return topo;
 }
 
-void dumpGraph(graph_t *graph) {
+void dumpGraph(graph_t *graph) { // and this too
     printf("Topology: %s\n", graph->topologyName);
 
     node_t *node = NULL;
