@@ -22,7 +22,7 @@ struct link {
 struct node {
     char nodeName[NODE_NAME_SIZE];
     interface_t *interfaces[MAX_INTF_PER_NODE];
-    glued_ll_t graphGlue;
+    glued_ll_node_t graphGlue;
 };
 
 typedef struct graph {
