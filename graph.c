@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdio.h>
 
+// FIX MAKEFILE LATER. RUN USING: gcc -o testapp testapp.c graph.c linked_list/linked_list.c -Wall
+
 static inline node_t* getNBRNode(interface_t *interface) {
     return interface->attNode;
 }
