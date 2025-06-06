@@ -51,9 +51,9 @@ void insertLinkBetweenNodes(node_t *node1, node_t *node2,
 
 graph_t *createNewGraph(char *topologyName) {
     graph_t *graph = calloc(1, sizeof(graph_t));
-    strncpy(graph->topologyName, topologyName, 32);
-    graph->topologyName[32] = '\0';
-    initGluedLL(&graph->nodeList, 0);
+    strncpy(graph->topologyName, topologyName, sizeof(graph->topologyName) - 1);
+    graph->topologyName[sizeof(graph->topologyName) - 1] = '\0';
+    initGluedLL(&graph->nodeList, offsetof(node_t, graphGlue));
     return graph;
 }
 
