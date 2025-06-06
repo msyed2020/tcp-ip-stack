@@ -99,28 +99,11 @@ static inline node_t *getNodeByNodeName(graph_t *topo, char *nodeName) {
 }
 
 graph_t *buildFirstTopo() { // ensure this crap works
-    graph_t *topo = calloc(1, sizeof(graph_t));
-    strncpy(topo->topologyName, "MyFirstTopo", sizeof(topo->topologyName) - 1);
-    topo->topologyName[sizeof(topo->topologyName) - 1] = '\0';
-    initGluedLL(&topo->nodeList, offsetof(node_t, graphGlue));
+    graph_t *topo = createNewGraph("MyFirstTopo");
 
-    node_t *R1 = calloc(1, sizeof(node_t));
-    strncpy(R1->nodeName, "R1", NODE_NAME_SIZE - 1);
-    R1->nodeName[NODE_NAME_SIZE - 1] = '\0';
-    gluedLLNodeInit(&R1->graphGlue);
-    gluedLLAddFront(&topo->nodeList, &R1->graphGlue);
-
-    node_t *R2 = calloc(1, sizeof(node_t));
-    strncpy(R2->nodeName, "R2", NODE_NAME_SIZE - 1);
-    R2->nodeName[NODE_NAME_SIZE - 1] = '\0';
-    gluedLLNodeInit(&R2->graphGlue);
-    gluedLLAddFront(&topo->nodeList, &R2->graphGlue);
-
-    node_t *R3 = calloc(1, sizeof(node_t));
-    strncpy(R3->nodeName, "R3", NODE_NAME_SIZE - 1);
-    R3->nodeName[NODE_NAME_SIZE - 1] = '\0';
-    gluedLLNodeInit(&R3->graphGlue);
-    gluedLLAddFront(&topo->nodeList, &R3->graphGlue);
+    node_t *R1 = createGraphNode(topo, "R1");
+    node_t *R2 = createGraphNode(topo, "R2");
+    node_t *R3 = createGraphNode(topo, "R3");
 
     insertLinkBetweenNodes(R1, R2, "eth0", "eth1", 1);
     insertLinkBetweenNodes(R2, R3, "eth2", "eth3", 1);
@@ -139,14 +122,12 @@ void dumpGraph(graph_t *graph) { // and this too
         for (int i = 0; i < MAX_INTF_PER_NODE; i++) {
             interface_t *intf = node->interfaces[i];
             if (intf && intf->link) {
-                node_t *nbr = intf->link->interface1.attNode == node
+                node_t *nbr = (intf == &intf->link->interface1)
                                 ? intf->link->interface2.attNode
                                 : intf->link->interface1.attNode;
 
                 printf("  Interface: %s --> %s (cost: %u)\n",
-                       intf->ifName,
-                       nbr->nodeName,
-                       intf->link->cost);
+                    intf->ifName, nbr->nodeName, intf->link->cost);
             }
         }
     } ITERATE_GLUED_LL_END;
