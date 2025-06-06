@@ -61,8 +61,8 @@ node_t *createGraphNode(graph_t *graph, char *nodeName) {
     node_t *node = calloc(1, sizeof(node_t));
     strncpy(node->nodeName, nodeName, NODE_NAME_SIZE);
     node->nodeName[NODE_NAME_SIZE] = '\0';
-    init_glthread(&node->graphGlue);
-    glthreadAddNext(&graph->nodeList, &node->graphGlue);
+    initGluedLL(&node->graphGlue);
+    gluedLLAddFront(&graph->nodeList, &node->graphGlue);
     return node;
 }
 
