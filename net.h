@@ -1,4 +1,4 @@
-// TEST GRAPH.C AND GRAPH.H BEFORE UTILIZING THIS PAGE
+// Extension of graph.h and graph.c to include networking properties
 
 #ifndef __NET__
 #define __NET__
