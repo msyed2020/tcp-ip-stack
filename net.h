@@ -14,3 +14,9 @@ typedef struct ip_add { // IP address
 typedef struct mac_add { // MAC address
     char mac[48];
 } mac_add_t;
+
+typedef struct node_network_prop {
+    bool_t isLoopBack;
+    ip_add_t loopback_addr;
+} node_network_prop_t;
+
