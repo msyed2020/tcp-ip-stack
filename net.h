@@ -38,3 +38,16 @@ static inline void initInterfaceNetworkProp(interface_network_prop_t *interfaceN
     memset(interfaceNetworkProp->ip_address.ip_addr, 0, 16);
     interfaceNetworkProp->mask = 0;
 }
+
+// MACROS
+#define IF_MAC(interface_ptr)   ((interface_ptr)->interfaceNetworkProp.mac_add.mac)
+#define IF_IP(interface_ptr)    ((interface_ptr)->interfaceNetworkProp.ip_add.ip_addr)
+#define NODE_LO_ADDR(node_ptr)  (node_ptr->nodeNetworkProp.loopback_addr.ip_addr)
+
+// Network Node Properties APIs
+
+bool_t nodeSetLoopbackAddress(node_t *node, char *ip_addr);
+bool_t nodeSetInterfaceIPAddress(node_t *node, char *localInterface, char *ip_addr, char mask);
+bool_t nodeRemoveInterfaceIPAddress(node_t *node, char *localInterface);
+
+#endif
