@@ -20,3 +20,8 @@ typedef struct node_network_prop {
     ip_add_t loopback_addr;
 } node_network_prop_t;
 
+static inline void initNodeNetworkProp(node_network_prop_t *nodeNetworkProp) {
+    nodeNetworkProp->isLoopBack = false;
+    memset(node_network_prop->loopback_addr.ip_addr, 0, 16);
+}
+
