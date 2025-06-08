@@ -32,3 +32,9 @@ typedef struct interface_network_prop {
     char mask;
 } interface_network_prop_t;
 
+static inline void initInterfaceNetworkProp(interface_network_prop_t *interfaceNetworkProp) {
+    memset(interfaceNetworkProp->mac_addr.mac, 0, 48);
+    interfaceNetworkProp->isIP = false;
+    memset(interfaceNetworkProp->ip_address.ip_addr, 0, 16);
+    interfaceNetworkProp->mask = 0;
+}
