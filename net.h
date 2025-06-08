@@ -25,3 +25,10 @@ static inline void initNodeNetworkProp(node_network_prop_t *nodeNetworkProp) {
     memset(node_network_prop->loopback_addr.ip_addr, 0, 16);
 }
 
+typedef struct interface_network_prop {
+    mac_add_t mac_addr;
+    bool_t isIP;
+    ip_add_t ip_address;
+    char mask;
+} interface_network_prop_t;
+
