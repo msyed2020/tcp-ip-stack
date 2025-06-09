@@ -27,3 +27,5 @@ bool_t nodeSetInterfaceIPAddress(node_t *node, char *localInterface, char *ip_ad
 bool_t nodeRemoveInterfaceIPAddress(node_t *node, char *localInterface) {
     return true;
 }
+
+// Functionality Subprograms
