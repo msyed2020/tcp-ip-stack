@@ -1,6 +1,8 @@
 #include "net.h"
 #include "graph.c"
 
+// Network Node Property APIs
+
 bool_t nodeSetLoopbackAddress(node_t *node, char *ip_addr) {
     assert(ip_addr);
 
