@@ -31,5 +31,27 @@ bool_t nodeRemoveInterfaceIPAddress(node_t *node, char *localInterface) {
 // Functionality Subprograms
 
 void interfaceAssignMacAddress(interface_t *interface) {
-    
+    node_t *node = interface->att_node;
+
+    if(!node) return;
+
+    unsigned int hash_code_val = 0;
+    hash_code_val = hash_code(node->node_name, NODE_NAME_SIZE);
+    hash_code_val *= hash_code(interface->if_name, IF_NAME_SIZE);
+    memset(IF_MAC(interface), 0, sizeof(IF_MAC(interface)));
+    memcpy(IF_MAC(interface), (char *)&hash_code_val, sizeof(unsigned int));
+
+}
+
+static unsigned int hash_code(void *ptr, unsigned int size) {
+    unsigned int value=0, i =0;
+    char *str = (char*) ptr;
+    while(i < size) {
+        value += *str;
+        value*=97;
+        str++;
+        i++;
+    }
+    return value;
+
 }
