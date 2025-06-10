@@ -43,6 +43,7 @@ static inline void initInterfaceNetworkProp(interface_network_prop_t *interfaceN
 #define IF_MAC(interface_ptr)   ((interface_ptr)->interfaceNetworkProp.mac_add.mac)
 #define IF_IP(interface_ptr)    ((interface_ptr)->interfaceNetworkProp.ip_add.ip_addr)
 #define NODE_LO_ADDR(node_ptr)  (node_ptr->nodeNetworkProp.loopback_addr.ip_addr)
+#define IS_INTF_L3_MODE(inteface_ptr)   ((interface_ptr)->interfaceNetworkProp.isIP)
 
 // Network Node Properties APIs
 
@@ -52,7 +53,7 @@ bool_t nodeRemoveInterfaceIPAddress(node_t *node, char *localInterface);
 
 // Functionality Subprograms
 
-void interfaceAssignMacAddress(interface_t *interface)
+void interfaceAssignMacAddress(interface_t *interface);
 
 
 #endif
