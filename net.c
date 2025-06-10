@@ -29,3 +29,7 @@ bool_t nodeRemoveInterfaceIPAddress(node_t *node, char *localInterface) {
 }
 
 // Functionality Subprograms
+
+void interfaceAssignMacAddress(interface_t *interface) {
+    
+}

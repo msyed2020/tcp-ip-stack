@@ -50,4 +50,9 @@ bool_t nodeSetLoopbackAddress(node_t *node, char *ip_addr);
 bool_t nodeSetInterfaceIPAddress(node_t *node, char *localInterface, char *ip_addr, char mask);
 bool_t nodeRemoveInterfaceIPAddress(node_t *node, char *localInterface);
 
+// Functionality Subprograms
+
+void interfaceAssignMacAddress(interface_t *interface)
+
+
 #endif
