@@ -68,7 +68,6 @@ node_t *createGraphNode(graph_t *graph, char *nodeName) {
     return node;
 }
 
-// edit the following functions for our code later
 
 static inline interface_t * getNodeIfByName(node_t *node, char *ifName) {
     if (!node || !ifName) {
@@ -100,7 +99,7 @@ static inline node_t *getNodeByNodeName(graph_t *topo, char *nodeName) {
     return NULL;
 }
 
-graph_t *buildFirstTopo() { // ensure this crap works
+graph_t *buildFirstTopo() {
     graph_t *topo = createNewGraph("MyFirstTopo");
 
     node_t *R1 = createGraphNode(topo, "R1");
@@ -114,7 +113,7 @@ graph_t *buildFirstTopo() { // ensure this crap works
     return topo;
 }
 
-void dumpGraph(graph_t *graph) { // and this too
+void dumpGraph(graph_t *graph) {
     printf("Topology: %s\n", graph->topologyName);
 
     node_t *node = NULL;
