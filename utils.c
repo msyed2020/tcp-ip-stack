@@ -6,3 +6,5 @@ void applyMask(char *prefix, char mask, char *strPrefix) {
 }
 
 // finish function and check it
+
+// insert new functions here
