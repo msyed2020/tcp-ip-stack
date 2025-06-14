@@ -5,4 +5,3 @@ void applyMask(char *prefix, char mask, char *strPrefix) {
     return strPrefix;
 }
 
-// insert new functions here
